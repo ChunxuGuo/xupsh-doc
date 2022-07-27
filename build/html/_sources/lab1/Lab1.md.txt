@@ -32,21 +32,21 @@
 
 2. 在**Project name**输入项目名**fir_hls_prj**，点击**Browse**选择一个合适的目录位置，点击**Next**
    
-   ![1.1.2.PNG](./img/1.1.2.PNG)
+   ![1.1.2.png](./img/1.1.2.png)
 
 3. 点击**Add Files...**，将**src**目录下的**fir.h**和**fir.cpp**添加到项目中
 
 4. 点击**Top Function**栏中的**Browse**按键，选择**fir_wrap**，这是我们进行综合时候的顶层函数，点击**Next**
    
-   ![1.1.2.PNG](./img/1.1.2.PNG)
+   ![1.1.2.png](./img/1.1.2.png)
 
 5. 点击**Add Files...**，将**src**目录下的**fir_tb.cpp**添加到项目中，点击**Next**
    
-   ![1.1.3.PNG](./img/1.1.3.PNG)
+   ![1.1.3.png](./img/1.1.3.png)
 
 6. 下面进入到**Solution Configuration**界面，保持其他选项不变，在**Part Selection**栏最右侧点击 **....** 字样的按钮，在**Search**栏的搜索框中输入**xc7z020clg484-1**，即**PYNQ-Z2**板卡所使用的器件型号
    
-   ![1.1.4.PNG](./img/1.1.4.PNG)
+   ![1.1.4.png](./img/1.1.4.png)
 
 7. 点击**Finish**，完成项目的创建
 
@@ -62,11 +62,11 @@
    
    4. 右下方的**Console**，包含了控制台、报错信息、版本控制等
 
-   ![1.2.1.PNG](./img/1.2.1.PNG)
+   ![1.2.1.png](./img/1.2.1.png)
 
 2. 下面，我们对设计进行C仿真。在左下方的**Flow Navigator**中点击**Run C Simulation**，在弹出的**C Simulation Dialog**窗口中不做改动，点击**OK**进行C仿真
 
-   ![1.2.2.PNG](./img/1.2.2.PNG)
+   ![1.2.2.png](./img/1.2.2.png)
 
 3. 等待数秒，在仿真完成后**Vitis HLS**自动打开一个log文件，可以看到已经设计通过了C仿真
    
@@ -116,15 +116,15 @@
 
 2. 在**Project name**输入项目名**fir_vivado_prj**，点击右侧的 **...** 按键选择一个合适的目录位置，点击**Next** 
    
-   ![2.1.1.PNG](./img/2.1.1.PNG)
+   ![2.1.1.png](./img/2.1.1.png)
 
 3. 进入**Project Type**界面，勾选上**Do not specify sources at this time**，再点击**Next**
    
-   ![2.1.2.PNG](./img/2.1.2.PNG)
+   ![2.1.2.png](./img/2.1.2.png)
 
 4. 进入**Default Part**界面，在**Search**栏中搜索**xc7z020clg484-1**，将其选中，再点击**Next**
    
-   ![2.1.3.PNG](./img/2.1.3.PNG)
+   ![2.1.3.png](./img/2.1.3.png)
 
 5. 点击**Finish**完成项目创建
 
@@ -138,7 +138,7 @@
 
 3. 可以看到对应的IP已经被成功添加到了工程中，在两个窗口中依次单击**OK**来关闭这些窗口
    
-   ![2.2.2.PNG](./img/2.2.2.PNG)
+   ![2.2.2.png](./img/2.2.2.png)
 
 #### 2.3 创建Block Design
 
@@ -162,11 +162,11 @@
    
    - 点击**OK**
    
-   ![2.3.4.PNG](./img/2.3.4.PNG)
+   ![2.3.4.png](./img/2.3.4.png)
 
 5. 点击Diagam窗口上方的 **+** 按钮，搜索**fir**，可以看到我们刚才导入的IP已经可以使用了，双击**Fir_wrap**以将其添加到设计中
    
-   ![2.3.6.PNG](./img/2.3.6.PNG)
+   ![2.3.6.png](./img/2.3.6.png)
 
 6. 下面我们对设计进行自动连线。点击窗口上方的蓝色下划线提示**Run Connection Automation**，弹出对应窗口，将左侧**All Automation** 选项勾选上，再点击**OK**
    
@@ -182,15 +182,15 @@
 
 9. 在左侧的**Source > Design Sources > design_1**选项上右键，选择**Generate Output Products**
    
-   ![2.3.8.PNG](./img/2.3.8.PNG)
+   ![2.3.8.png](./img/2.3.8.png)
 
 10. 在弹出窗口中保持各配置不变，点击**Generate**，这一过程将耗费约1分钟的时间
     
-   ![2.3.9.PNG](./img/2.3.9.PNG)
+   ![2.3.9.png](./img/2.3.9.png)
 
 11. 在左侧的**Source > Design Sources > design_1**选项上右键，选择**Create HDL Wrapper**，在弹出窗口中保持选项不变并点击**OK**，完成后可以看到在**design_1.bd**上层嵌套了一层**design_1_wrapper.v**文件
     
-   ![2.3.11.PNG](./img/2.3.11.PNG)
+   ![2.3.11.png](./img/2.3.11.png)
 
 #### 2.4 综合与生成比特流
 
@@ -200,15 +200,15 @@
 
 2. 综合完成后，会弹出**Synthesis Completed**窗口，在**Next**栏中保持默认的**Run Implementation**选项，并点击**OK**，如果出现新弹窗，同样保持默认选项并点击**OK**即可
    
-   ![2.4.2.PNG](./img/2.4.2.PNG)
+   ![2.4.2.png](./img/2.4.2.png)
 
 3. **Implementation**结束后，会弹出**Implementation Completed**窗口，在**Next**栏中选择**Generate Bitstream**选项，并点击**OK**，如果出现新弹窗，同样保持默认选项并点击**OK**即可
    
-   ![2.4.4.PNG](./img/2.4.4.PNG)
+   ![2.4.4.png](./img/2.4.4.png)
 
 4. 比特流生成后，会弹出**Bitstream Genreation Completed**窗口，我们直接点击**Cancel**即可
    
-   ![2.4.3.PNG](./img/2.4.3.PNG)
+   ![2.4.3.png](./img/2.4.3.png)
 
 5. 至此，我们已经完成了硬件部分的设计与导出 
 
@@ -218,11 +218,11 @@
 
 1. 在文件管理器中访问 **\fir_vivado_prj\fir_vivado_prj.runs\impl_1** 目录，该目录下的**design_1_wrapper.bit**文件即为生成的比特流文件，将其复制到自己的文件夹中保存，并重命名为**fir.bit**
    
-   ![3.2.2.PNG](./img/3.2.2.PNG)
+   ![3.2.2.png](./img/3.2.2.png)
 
 2. 在文件管理器中访问 **\fir_vivado_prj\fir_vivado_prj.gen\sources_1\bd\design_1\hw_handoff** 目录，其中的**design_1.hwh**即为我们需要的**hardware handoff**文件，将其复制到自己的文件夹中保存，并重命名为**fir.hwh**
    
-   ![3.2.3.PNG](./img/3.2.3.PNG)
+   ![3.2.3.png](./img/3.2.3.png)
 
 #### 3.2 访问Jupyter
 
@@ -236,7 +236,7 @@
      
      - 如果你在前面操作中导出失败了，你也可以先使用 **/overlay** 目录下的**fir.bit**与**fir.hwh**文件上传，以完成余下实验 
    
-   ![3.2.1.PNG](./img/3.2.1.PNG) 
+   ![3.2.1.png](./img/3.2.1.png) 
 
 #### 3.3 部署与运行Overlay
 
@@ -244,6 +244,6 @@
 
 2. 点击窗口上侧的**Run**按钮，**Jupyter Notebook**会执行当前**Cell**，同时自动切换到下一个**Cell**
    
-   ![3.3.1.PNG](./img/3.3.1.PNG)
+   ![3.3.1.png](./img/3.3.1.png)
 
 3. 完成按照顺序依次点击**Run**至结束即可，各代码块的含义在**Jupyter Notebook**中已经标注，请阅读**Jupyter Notebook**中的信息继续完成实验。
