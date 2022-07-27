@@ -3,19 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-******************
-XUPSH 学习路线指南
-******************
+****************************************
+PYNQ Project Based Learning Introducton
+****************************************
 
 .. toctree::
    :maxdepth: 2
-   :caption: 导航
    :hidden:
 
-   RTL
-   PYNQ
+   lab1/Lab1.md
+   lab1/fir
 
-Xilinx FPGA 学习路线
-====================
+Lab1 设计FIR滤波器分离鸟类声音
+========================================
 
-在首页直接写入文本
+使用HLS设计一个高效的FIR滤波器，对混杂鸟类叫声音频进行滤波，分离出麻雀的叫声。
+
+.. image:: img/fir_overview.png
+  :height: 350
+  :align: center

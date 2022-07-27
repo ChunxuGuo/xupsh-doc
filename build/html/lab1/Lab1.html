@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab1 设计FIR滤波器分离鸟类声音(hw) &mdash; xupsh_doc v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Lab1 使用FIR滤波器分离鸟类声音" href="fir.html" />
+    <link rel="prev" title="PYNQ Project Based Learning Introducton" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> xupsh_doc
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lab1 设计FIR滤波器分离鸟类声音(hw)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">目标</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">环境要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">实验步骤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vitis-hlsfir-ip">1. 在Vitis_HLS中设计FIR IP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">1.1 创建一个新项目</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-simulation">1.2 C-Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-synthesis">1.3 C-Synthesis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-rtl-co-simulation">1.4 C/RTL Co-simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtl">1.5 导出RTL</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vivadoip">2. 在Vivado中进行IP集成</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vivado">2.1 创建一个新Vivado项目</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ip">2.2 导入IP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#block-design">2.3 创建Block Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">2.4 综合与生成比特流</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pynq">3. 构建PYNQ设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bithwh">3.1 提取bit与hwh文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter">3.2 访问Jupyter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overlay">3.3 部署与运行Overlay</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fir.html">Lab1 使用FIR滤波器分离鸟类声音</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">xupsh_doc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Lab1 设计FIR滤波器分离鸟类声音(hw)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/lab1/Lab1.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="lab1-fir-hw">
+<h1>Lab1 设计FIR滤波器分离鸟类声音(hw)<a class="headerlink" href="#lab1-fir-hw" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>目标<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>在完成本实验后，您应当学会：</p>
+<ul class="simple">
+<li><p>如何使用Vitis HLS构建一个项目</p></li>
+<li><p>在Vitis HLS中进行仿真、综合与IP导出</p></li>
+<li><p>使用Vivado对HLS导出的IP进行集成</p></li>
+<li><p>使用PYNQ构建一个简单的应用</p></li>
+</ul>
+<p>简而言之，您将掌握使用HLS进行加速核设计与部署到PYNQ的基本流程。出于篇幅限制，本实验仅介绍基本工具操作流程。</p>
+</section>
+<section id="id2">
+<h2>环境要求<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>PYNQ-Z2远程实验室服务或物理板卡</p></li>
+<li><p>Vitis HLS</p></li>
+<li><p>Vivado</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>实验步骤<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<section id="vitis-hlsfir-ip">
+<h3>1. 在Vitis_HLS中设计FIR IP<a class="headerlink" href="#vitis-hlsfir-ip" title="Permalink to this heading"></a></h3>
+<section id="id4">
+<h4>1.1 创建一个新项目<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>打开<strong>Vitis HLS</strong>软件，点击<strong>Create Project</strong>，创建一个新的项目</p></li>
+<li><p>在<strong>Project name</strong>输入项目名<strong>fir_hls_prj</strong>，点击<strong>Browse</strong>选择一个合适的目录位置，点击<strong>Next</strong></p>
+<p><img alt="1.1.2.PNG" src="../_images/1.1.2.PNG" /></p>
+</li>
+<li><p>点击<strong>Add Files…</strong>，将<strong>src</strong>目录下的<strong>fir.h</strong>和<strong>fir.cpp</strong>添加到项目中</p></li>
+<li><p>点击<strong>Top Function</strong>栏中的<strong>Browse</strong>按键，选择<strong>fir_wrap</strong>，这是我们进行综合时候的顶层函数，点击<strong>Next</strong></p>
+<p><img alt="1.1.2.PNG" src="../_images/1.1.2.PNG" /></p>
+</li>
+<li><p>点击<strong>Add Files…</strong>，将<strong>src</strong>目录下的<strong>fir_tb.cpp</strong>添加到项目中，点击<strong>Next</strong></p>
+<p><img alt="1.1.3.PNG" src="../_images/1.1.3.PNG" /></p>
+</li>
+<li><p>下面进入到<strong>Solution Configuration</strong>界面，保持其他选项不变，在<strong>Part Selection</strong>栏最右侧点击 <strong>….</strong> 字样的按钮，在<strong>Search</strong>栏的搜索框中输入<strong>xc7z020clg484-1</strong>，即<strong>PYNQ-Z2</strong>板卡所使用的器件型号</p>
+<p><img alt="1.1.4.PNG" src="../_images/1.1.4.PNG" /></p>
+</li>
+<li><p>点击<strong>Finish</strong>，完成项目的创建</p></li>
+</ol>
+</section>
+<section id="c-simulation">
+<h4>1.2 C-Simulation<a class="headerlink" href="#c-simulation" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>在完成项目创建后，<strong>Vitis HLS</strong>会跳转到新的界面，其由四个主要部分组成：</p>
+<ol class="simple">
+<li><p>左上方的<strong>Explorer</strong>，其包含了工程中的各个文件</p></li>
+<li><p>左下方的<strong>Flow Navigator</strong>，其展示了HLS设计中的各环节</p></li>
+<li><p>右上方的<strong>编辑器区域</strong>，开发者在此修改设计的代码</p></li>
+<li><p>右下方的<strong>Console</strong>，包含了控制台、报错信息、版本控制等</p></li>
+</ol>
+<p><img alt="1.2.1.PNG" src="../_images/1.2.1.PNG" /></p>
+</li>
+<li><p>下面，我们对设计进行C仿真。在左下方的<strong>Flow Navigator</strong>中点击<strong>Run C Simulation</strong>，在弹出的<strong>C Simulation Dialog</strong>窗口中不做改动，点击<strong>OK</strong>进行C仿真</p>
+<p><img alt="1.2.2.PNG" src="../_images/1.2.2.PNG" /></p>
+</li>
+<li><p>等待数秒，在仿真完成后<strong>Vitis HLS</strong>自动打开一个log文件，可以看到已经设计通过了C仿真</p>
+<p><img alt="1.2.3.png" src="../_images/1.2.3.png" /></p>
+</li>
+</ol>
+</section>
+<section id="c-synthesis">
+<h4>1.3 C-Synthesis<a class="headerlink" href="#c-synthesis" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>下面，我们对设计进行C综合。在左下方的<strong>Flow Navigator</strong>中点击<strong>Run C Synthesis</strong>，在弹出的<strong>C Synthesis - Active Solution</strong>窗口中保持各选项不变，点击<strong>OK</strong>开始综合</p>
+<p><img alt="1.3.1.png" src="../_images/1.3.1.png" /></p>
+</li>
+<li><p>等待数秒，<strong>Vitis HLS</strong>会将其综合的各步骤的信息打印在<strong>Console</strong>中</p></li>
+<li><p>综合完成后，会弹出 <strong>Systhesis Summary(solution1)</strong> 窗口，我们可以在此看到<strong>Vitis HlS</strong> 给出的时钟频率信息、时钟周期数和资源消耗等</p>
+<p><img alt="1.3.2.png" src="../_images/1.3.2.png" /></p>
+</li>
+</ol>
+</section>
+<section id="c-rtl-co-simulation">
+<h4>1.4 C/RTL Co-simulation<a class="headerlink" href="#c-rtl-co-simulation" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>下面，我们对设计进行C-RTL联合仿真。在左下方的<strong>Flow Navigator</strong>中点击<strong>Run C/RTL COSIMULATION</strong>，在弹出的<strong>Co-simulation Dialog</strong>窗口中保持各选项不变，点击<strong>OK</strong>开始综合</p>
+<p><img alt="1.4.1.png" src="../_images/1.4.1.png" /></p>
+</li>
+<li><p>等待约1分钟，C/RTL联合仿真的综合时间通常较长，仿真结束后会弹出<strong>Co-simulation Report(solution1)</strong> 窗口 ，包含了是否通过仿真、性能估测等信息</p>
+<p><img alt="1.4.2.png" src="../_images/1.4.2.png" /></p>
+</li>
+</ol>
+</section>
+<section id="rtl">
+<h4>1.5 导出RTL<a class="headerlink" href="#rtl" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>下面，我们对设计进行RTL导出。在左下方的<strong>Flow Navigator</strong>中点击<strong>Export RTL</strong>，在弹出的<strong>Export RTL</strong>窗口中保持各选项不变，点击<strong>OK</strong>开始RTL的导出</p>
+<p><img alt="1.5.1.png" src="../_images/1.5.1.png" /></p>
+</li>
+<li><p>等待约半分钟，<strong>Console</strong>中打印<strong>Finished Export RTL/Implementation.</strong> 表明RTL设计已经导出完成，你可以在**\fir_hls_prj\solution1\impl\export.zip**找到导出的文件</p></li>
+<li><p>为了后续使用的便利，请将**\fir_hls_prj\solution1\impl\export.zip<strong>文件解压到其所在目录下，即得到一个</strong>\fir_hls_prj\solution1\impl\export** 文件夹</p>
+<p><img alt="1.5.2.png" src="../_images/1.5.2.png" /></p>
+</li>
+<li><p>至此，我们已经完成了FIR加速核的设计与导出</p></li>
+</ol>
+</section>
+</section>
+<section id="vivadoip">
+<h3>2. 在Vivado中进行IP集成<a class="headerlink" href="#vivadoip" title="Permalink to this heading"></a></h3>
+<section id="vivado">
+<h4>2.1 创建一个新Vivado项目<a class="headerlink" href="#vivado" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>打开<strong>Vivado</strong>软件，点击<strong>Create Project</strong>，创建一个新的项目，点击<strong>Next</strong></p></li>
+<li><p>在<strong>Project name</strong>输入项目名<strong>fir_vivado_prj</strong>，点击右侧的 <strong>…</strong> 按键选择一个合适的目录位置，点击<strong>Next</strong></p>
+<p><img alt="2.1.1.PNG" src="../_images/2.1.1.PNG" /></p>
+</li>
+<li><p>进入<strong>Project Type</strong>界面，勾选上<strong>Do not specify sources at this time</strong>，再点击<strong>Next</strong></p>
+<p><img alt="2.1.2.PNG" src="../_images/2.1.2.PNG" /></p>
+</li>
+<li><p>进入<strong>Default Part</strong>界面，在<strong>Search</strong>栏中搜索<strong>xc7z020clg484-1</strong>，将其选中，再点击<strong>Next</strong></p>
+<p><img alt="2.1.3.PNG" src="../_images/2.1.3.PNG" /></p>
+</li>
+<li><p>点击<strong>Finish</strong>完成项目创建</p></li>
+</ol>
+</section>
+<section id="ip">
+<h4>2.2 导入IP<a class="headerlink" href="#ip" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>我们需要首先将从<strong>Vitis HLS</strong>中导出的IP导入到<strong>Vivado</strong>中，点击左侧窗口<strong>Flow Navigator</strong>中的<strong>Settings</strong> 选项，弹出<strong>Settings</strong>窗口</p></li>
+<li><p>将左侧的<strong>Project Settings</strong>中展开<strong>IP</strong>栏目，选中<strong>Repository</strong>项，点击右侧面板中的 <strong>+</strong> 按键，在弹出窗口中选择刚才解压出来IP，即**\fir_hls_prj\solution1\impl\export**，在点击<strong>Select</strong></p>
+<p><img alt="2.2.1.png" src="../_images/2.2.1.png" /></p>
+</li>
+<li><p>可以看到对应的IP已经被成功添加到了工程中，在两个窗口中依次单击<strong>OK</strong>来关闭这些窗口</p>
+<p><img alt="2.2.2.PNG" src="../_images/2.2.2.PNG" /></p>
+</li>
+</ol>
+</section>
+<section id="block-design">
+<h4>2.3 创建Block Design<a class="headerlink" href="#block-design" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>下面我们创建一个<strong>Block Design</strong>，利用<strong>Vivado</strong>的IP集成功能来构建完整系统。在左侧的<strong>Flow Navigator</strong>中点击<strong>IP INTEGRATOR &gt; Create Block Design</strong>，在弹出的<strong>Create Block Design</strong> 窗口中保持各选项不变，设计名称使用默认的<strong>design_1</strong>，点击<strong>OK</strong>创建<strong>Block Design</strong></p>
+<p><img alt="2.3.1.png" src="../_images/2.3.1.png" /></p>
+</li>
+<li><p>在出现的<strong>Diagram</strong>窗口中点击上方的 <strong>+</strong> 按钮，会弹出一个搜索框，在输入栏中键入<strong>zynq</strong>，双击备选项中出现的<strong>ZYNQ7 Processing System</strong>，即可将该IP添加到设计中</p>
+<p><img alt="2.3.2.png" src="../_images/2.3.2.png" /></p>
+</li>
+<li><p>在窗口上方会出现蓝色下划线提示<strong>Run Block Automation</strong>, 单击该区域弹出对应窗口，我们保持默认设置不变，直接点击<strong>OK</strong></p>
+<p><img alt="2.3.3.png" src="../_images/2.3.3.png" /></p>
+</li>
+<li><p>下面，我们需要对上述<strong>Processing System</strong>进行配置，添加一个HP端口</p>
+<ul class="simple">
+<li><p>双击<strong>Diagram</strong>中的<strong>processing_system7_0</strong>模块，弹出<strong>Re-customize IP</strong>窗口</p></li>
+<li><p>在左侧<strong>Page Navigator</strong>中选择<strong>PS-PL Configuration</strong>页面，展开右侧选项中的<strong>HP Slave AXI Interface</strong>，勾选上<strong>S AXI HP0 interface</strong>选项</p></li>
+<li><p>点击<strong>OK</strong></p></li>
+</ul>
+<p><img alt="2.3.4.PNG" src="../_images/2.3.4.PNG" /></p>
+</li>
+<li><p>点击Diagam窗口上方的 <strong>+</strong> 按钮，搜索<strong>fir</strong>，可以看到我们刚才导入的IP已经可以使用了，双击<strong>Fir_wrap</strong>以将其添加到设计中</p>
+<img title="" src="./img/2.3.6.png" alt="2.3.6.png" width="208"></li>
+<li><p>下面我们对设计进行自动连线。点击窗口上方的蓝色下划线提示<strong>Run Connection Automation</strong>，弹出对应窗口，将左侧<strong>All Automation</strong> 选项勾选上，再点击<strong>OK</strong></p>
+<p><img alt="2.3.5.png" src="../_images/2.3.5.png" /></p>
+</li>
+<li><p>系统将根据对应接口自动进行连线，我们可以得到如下图的设计</p>
+<p><img alt="2.3.7.png" src="../_images/2.3.7.png" /></p>
+</li>
+<li><p>在<strong>Diagram</strong>上侧的工具栏中点击勾形图标<strong>Validate Design</strong>，对设计进行验证</p>
+<p><img alt="2.3.10.png" src="../_images/2.3.10.png" /></p>
+</li>
+<li><p>在左侧的<strong>Source &gt; Design Sources &gt; design_1</strong>选项上右键，选择<strong>Generate Output Products</strong></p>
+<p><img alt="2.3.8.PNG" src="../_images/2.3.8.PNG" /></p>
+</li>
+<li><p>在弹出窗口中保持各配置不变，点击<strong>Generate</strong>，这一过程将耗费约1分钟的时间</p></li>
+</ol>
+<p><img alt="2.3.9.PNG" src="../_images/2.3.9.PNG" /></p>
+<ol class="simple">
+<li><p>在左侧的<strong>Source &gt; Design Sources &gt; design_1</strong>选项上右键，选择<strong>Create HDL Wrapper</strong>，在弹出窗口中保持选项不变并点击<strong>OK</strong>，完成后可以看到在<strong>design_1.bd</strong>上层嵌套了一层<strong>design_1_wrapper.v</strong>文件</p></li>
+</ol>
+<p><img alt="2.3.11.PNG" src="../_images/2.3.11.PNG" /></p>
+</section>
+<section id="id5">
+<h4>2.4 综合与生成比特流<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>在左侧的<strong>Flow Navigator</strong>中选择<strong>Run Synthesis</strong>，在弹出窗口中保持选择不变并选择<strong>OK</strong></p>
+<p><img alt="2.4.1.png" src="../_images/2.4.1.png" /></p>
+</li>
+<li><p>综合完成后，会弹出<strong>Synthesis Completed</strong>窗口，在<strong>Next</strong>栏中保持默认的<strong>Run Implementation</strong>选项，并点击<strong>OK</strong>，如果出现新弹窗，同样保持默认选项并点击<strong>OK</strong>即可</p>
+<p><img alt="2.4.2.PNG" src="../_images/2.4.2.PNG" /></p>
+</li>
+<li><p><strong>Implementation</strong>结束后，会弹出<strong>Implementation Completed</strong>窗口，在<strong>Next</strong>栏中选择<strong>Generate Bitstream</strong>选项，并点击<strong>OK</strong>，如果出现新弹窗，同样保持默认选项并点击<strong>OK</strong>即可</p>
+<p><img alt="2.4.4.PNG" src="../_images/2.4.4.PNG" /></p>
+</li>
+<li><p>比特流生成后，会弹出<strong>Bitstream Genreation Completed</strong>窗口，我们直接点击<strong>Cancel</strong>即可</p>
+<p><img alt="2.4.3.PNG" src="../_images/2.4.3.PNG" /></p>
+</li>
+<li><p>至此，我们已经完成了硬件部分的设计与导出</p></li>
+</ol>
+</section>
+</section>
+<section id="pynq">
+<h3>3. 构建PYNQ设计<a class="headerlink" href="#pynq" title="Permalink to this heading"></a></h3>
+<section id="bithwh">
+<h4>3.1 提取bit与hwh文件<a class="headerlink" href="#bithwh" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>在文件管理器中访问 <strong>\fir_vivado_prj\fir_vivado_prj.runs\impl_1</strong> 目录，该目录下的<strong>design_1_wrapper.bit</strong>文件即为生成的比特流文件，将其复制到自己的文件夹中保存，并重命名为<strong>fir.bit</strong></p>
+<p><img alt="3.2.2.PNG" src="../_images/3.2.2.PNG" /></p>
+</li>
+<li><p>在文件管理器中访问 <strong>\fir_vivado_prj\fir_vivado_prj.gen\sources_1\bd\design_1\hw_handoff</strong> 目录，其中的<strong>design_1.hwh</strong>即为我们需要的<strong>hardware handoff</strong>文件，将其复制到自己的文件夹中保存，并重命名为<strong>fir.hwh</strong></p>
+<p><img alt="3.2.3.PNG" src="../_images/3.2.3.PNG" /></p>
+</li>
+</ol>
+</section>
+<section id="jupyter">
+<h4>3.2 访问Jupyter<a class="headerlink" href="#jupyter" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>请先参考下发的《PYNQ远程实验室指南》完成账号注册与<strong>Jupyter</strong>访问</p></li>
+<li><p>登录<strong>Jupyter</strong>界面，点击界面右上方的<strong>upload</strong>按钮，将以下文件上传到开发板上:</p>
+<ul class="simple">
+<li><p><strong>/jupyter</strong> 目录下的<strong>fir.ipynb,</strong> <strong>chaffinch.jpg,</strong> <strong>curlew.jpg,</strong> <strong>birds.wav</strong></p></li>
+<li><p>上一步中得到的<strong>fir.bit</strong>与<strong>fir.hwh</strong>文件</p>
+<ul>
+<li><p>如果你在前面操作中导出失败了，你也可以先使用 <strong>/overlay</strong> 目录下的<strong>fir.bit</strong>与<strong>fir.hwh</strong>文件上传，以完成余下实验</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="3.2.1.PNG" src="../_images/3.2.1.PNG" /></p>
+</li>
+</ol>
+</section>
+<section id="overlay">
+<h4>3.3 部署与运行Overlay<a class="headerlink" href="#overlay" title="Permalink to this heading"></a></h4>
+<ol>
+<li><p>在<strong>Jupyter</strong>中进入到<strong>fir.ipynb</strong>页面，<strong>Kernel</strong>自动加载完成显示为<strong>Python3</strong>字样</p></li>
+<li><p>点击窗口上侧的<strong>Run</strong>按钮，<strong>Jupyter Notebook</strong>会执行当前<strong>Cell</strong>，同时自动切换到下一个<strong>Cell</strong></p>
+<p><img alt="3.3.1.PNG" src="../_images/3.3.1.PNG" /></p>
+</li>
+<li><p>完成按照顺序依次点击<strong>Run</strong>至结束即可，各代码块的含义在<strong>Jupyter Notebook</strong>中已经标注，请阅读<strong>Jupyter Notebook</strong>中的信息继续完成实验。</p></li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="PYNQ Project Based Learning Introducton" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="fir.html" class="btn btn-neutral float-right" title="Lab1 使用FIR滤波器分离鸟类声音" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, xup.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XUPSH 学习路线指南 &mdash; xupsh_doc v1.0 文档</title>
+  <title>PYNQ Project Based Learning Introducton &mdash; xupsh_doc v1.0 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -17,10 +17,11 @@
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
-    <link rel="next" title="RTL基础" href="RTL.html" /> 
+    <link rel="next" title="Lab1 设计FIR滤波器分离鸟类声音(hw)" href="lab1/Lab1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,10 +39,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">导航</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="RTL.html">RTL基础</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PYNQ.html">PYNQ框架</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="lab1/Lab1.html">Lab1 设计FIR滤波器分离鸟类声音(hw)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab1/fir.html">Lab1 设计FIR滤波器分离鸟类声音(sw)</a></li>
 </ul>
 
         </div>
@@ -58,7 +58,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>XUPSH 学习路线指南</li>
+      <li>PYNQ Project Based Learning Introducton</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -68,13 +68,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="xupsh">
-<h1>XUPSH 学习路线指南<a class="headerlink" href="#xupsh" title="Permalink to this heading"></a></h1>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="pynq-project-based-learning-introducton">
+<h1>PYNQ Project Based Learning Introducton<a class="headerlink" href="#pynq-project-based-learning-introducton" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<section id="xilinx-fpga">
-<h2>Xilinx FPGA 学习路线<a class="headerlink" href="#xilinx-fpga" title="Permalink to this heading"></a></h2>
-<p>在首页直接写入文本</p>
+<section id="lab1-fir">
+<h2>Lab1 设计FIR滤波器分离鸟类声音<a class="headerlink" href="#lab1-fir" title="Permalink to this heading"></a></h2>
+<p>使用HLS设计一个高效的FIR滤波器，对混杂鸟类叫声音频进行滤波，分离出麻雀的叫声。</p>
+<a class="reference internal image-reference" href="_images/fir_overview.png"><img alt="_images/fir_overview.png" class="align-center" src="_images/fir_overview.png" style="height: 350px;" /></a>
 </section>
 </section>
 
@@ -82,7 +107,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="RTL.html" class="btn btn-neutral float-right" title="RTL基础" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="lab1/Lab1.html" class="btn btn-neutral float-right" title="Lab1 设计FIR滤波器分离鸟类声音(hw)" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
